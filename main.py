@@ -1,21 +1,34 @@
+from time import sleep
+
+import pygame
+
+pygame.init()
 import requests
+import time
 
-base_url = "https://pokeapi.co/api/v2/"
 
-def get_pokemon_info(name):
-    url = f"{base_url}/pokemon/{name}"
-    response = requests.get(url)
+width, height = 512, 384
+BLACK = (128, 0, 0)
 
-    if response.status_code == 200:
-        pokemon_data = response.json()
-        return pokemon_data
-    else:
-        print(f"Failed to retrieve data {response.status_code}")
+screen = pygame.display.set_mode((width, height))
 
-pokemon_name = "pikachu"
-pokemon_info = get_pokemon_info(pokemon_name)
 
-if pokemon_info:
-    print(f"{pokemon_info["name"]}")
-    print(f"{pokemon_info["id"]}")
-    print(f"{pokemon_info["height"]}")
+image = pygame.image.load('ProfOak.jpg').convert_alpha()
+image.set_alpha(0)
+running = True
+
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+
+    screen.blit(image, (0, 0))
+
+    for x in range(128):
+        image.set_alpha(x)
+        pygame.time.delay(1)
+
+
+
+    pygame.display.update()
+
