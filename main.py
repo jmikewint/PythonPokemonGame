@@ -1,7 +1,7 @@
 import pygame
 from time import sleep
 
-from Sprites import NameSelectSprite
+from Sprites import NameSelectSprite, NameSelectSprite2
 from pyvidplayer import Video
 
 
@@ -91,7 +91,7 @@ running = True
 counter,counter2,counter3 = 0,0,0
 done_top = False
 done_bottom = False
-speed = 10
+speed = 5
 
 
 def dropShadowText_Top(screen, text, size, x, y, c, s,  colour=(120, 120, 120), drop_colour=(214, 214, 206),  font=None ):
@@ -132,313 +132,399 @@ def dropShadowText(screen, text, size, x, y, colour=(120, 120, 120), drop_colour
     text_bitmap = text_font.render(text, True, colour)
     screen.blit(text_bitmap, (x, y))
 
-#
-# def profoak_intro(counter, counter2, message_top, message_bottom, done_top, done_bottom, active_message_top, active_message_bottom):
-#     global faded, fade_num, flashed, flash_num
-#     check = 0
-#     dialogue_index = 0
-#     gender = [boy,girl]
-#     index = 0
-#
-#     def fade():
-#         global fade_num
-#         global faded
-#         pygame.time.delay(220)
-#         fade_num-=51
-#         nidoran.set_alpha(0)
-#         if fade_num < -150:
-#             pygame.time.delay(1500)
-#             faded = True
-#             return faded
-#
-#     def flash_in():
-#         global flashed
-#         global flash_num
-#         pygame.time.delay(140)
-#         flash_num+=51
-#
-#         if flash_num > 335:
-#             flashed = True
-#             return flashed
-#
-#     def flash_out():
-#         global flashed
-#         global flash_num
-#         pygame.time.delay(140)
-#         flash_num -= 51
-#         if flash_num < -305:
-#             flashed = False
-#             return flashed
-#
-#     def test_fade(width, height):
-#         testing_fade = pygame.Surface((width, height))
-#         testing_fade.fill((0, 0, 0))
-#         for alpha in range(0,255):
-#             testing_fade.set_alpha(alpha)
-#             screen.blit(testing_fade, (0, 0))
-#             pygame.display.update()
-#             pygame.time.delay(20)
-#
-#
-#
-#     #
-#     #
-#     # while check == 0:
-#     #     for event in pygame.event.get():
-#     #         if event.type == pygame.QUIT:
-#     #             pygame.quit()
-#     #         elif dialogue_index < 4 or 4 < dialogue_index < 9:
-#     #             if event.type == pygame.KEYDOWN:
-#     #                 if event.key == pygame.K_RETURN and done_top and done_bottom and active_message_top < len(messages_top) and active_message_bottom < len(messages_bottom):
-#     #                     active_message_top += 1
-#     #                     active_message_bottom += 1
-#     #
-#     #                     dialogue_index+=1
-#     #                     done_top = False
-#     #                     done_bottom = False
-#     #
-#     #                     message_top = messages_top[active_message_top]
-#     #                     message_bottom = messages_bottom[active_message_bottom]
-#     #
-#     #
-#     #                     counter = 0
-#     #                     counter2 = 0
-#     #
-#     #         elif dialogue_index == 9:
-#     #             if event.type == pygame.KEYDOWN:
-#     #                 if event.key == pygame.K_RETURN and done_top and done_bottom and active_message_top < len(messages_top) and active_message_bottom < len(messages_bottom):
-#     #                     check = 1
-#     #
-#     #                     active_message_top += 1
-#     #                     active_message_bottom += 1
-#     #
-#     #                     dialogue_index += 1
-#     #                     done_top = False
-#     #                     done_bottom = False
-#     #
-#     #                     message_top = messages_top[active_message_top]
-#     #                     message_bottom = messages_bottom[active_message_bottom]
-#     #
-#     #                     counter = 0
-#     #                     counter2 = 0
-#     #                     break
-#     #
-#     #     screen.blit(image, (0, 0))
-#     #     screen.blit(nidoran, (350, 325))
-#     #     screen.blit(flash_box, (0, 0))
-#     #     flash_box.set_alpha(flash_num)
-#     #     screen.blit(text_box, (0, 450))
-#     #     text_box.set_alpha(0)
-#     #     screen.blit(fade_box, (0, 0))
-#     #     fade_box.set_alpha(fade_num)
-#     #
-#     #     print(dialogue_index)
-#     #
-#     #     if faded == False:
-#     #         fade()
-#     #     if faded == True:
-#     #         text_box.set_alpha(255)
-#     #         if counter < speed * len(message_top):
-#     #             counter += 1
-#     #         elif counter >= speed * len(message_top):
-#     #             done_top = True
-#     #         if done_top == True:
-#     #             if counter2 < speed * len(message_bottom):
-#     #                 counter2 += 1
-#     #             elif counter2 >= speed * len(message_bottom):
-#     #                 done_bottom = True
-#     #
-#     #         dropShadowText_Top(screen,message_top, 10, 73, 478, counter, speed)
-#     #         dropShadowText_Bottom(screen,message_bottom, 10, 73, 538, counter2, speed)
-#     #
-#     #     if dialogue_index == 4 and done_top == True:
-#     #         flash_in()
-#     #         if flash_num >200 and 300 > flash_num:
-#     #
-#     #             active_message_top = 5
-#     #             active_message_bottom = 5
-#     #
-#     #
-#     #             done_top = False
-#     #             done_bottom = False
-#     #
-#     #             message_top = messages_top[active_message_top]
-#     #             message_bottom = messages_bottom[active_message_bottom]
-#     #
-#     #             counter = 0
-#     #             counter2 = 0
-#     #
-#     #     if flashed == True:
-#     #         dialogue_index = 5
-#     #         nidoran.set_alpha(255)
-#     #         flash_out()
-#     #
-#     #
-#     #     pygame.display.update()
-#
-#     for x in range(255, -250, -5):
-#         for event in pygame.event.get():
-#             if event.type == pygame.QUIT:
-#                 pygame.quit()
-#
-#         screen.blit(image2, (0, 0))
-#         screen.blit(image, (0, 0))
-#         pygame.time.delay(18)
-#         image.set_alpha(x)
-#         pygame.display.update()
-#
-#     pygame.time.wait(500)
-#     gy = 320
-#     gx = 700
-#     while check == 0:
-#
-#         message_top = messages_top[10]
-#         message_bottom = messages_bottom[10]
-#
-#         faded = True
-#
-#         for event in pygame.event.get():
-#             if event.type == pygame.QUIT:
-#                 pygame.quit()
-#             if event.type == pygame.KEYDOWN:
-#                 if gy != 380:
-#                     if event.key == pygame.K_DOWN:
-#                         gy += 60
-#                     elif event.key == pygame.K_RETURN:
-#                         check = 2
-#                         index = 0
-#                         active_message_top += 1
-#                         active_message_bottom += 1
-#
-#                         dialogue_index += 1
-#                         done_top = False
-#                         done_bottom = False
-#
-#                         message_top = messages_top[active_message_top]
-#                         message_bottom = messages_bottom[active_message_bottom]
-#
-#                         counter = 0
-#                         counter2 = 0
-#                         break
-#                 elif gy != 320:
-#                     if event.key == pygame.K_UP:
-#                         gy -= 60
-#                     elif event.key == pygame.K_RETURN:
-#                         check = 2
-#                         index = 1
-#                         active_message_top += 1
-#                         active_message_bottom += 1
-#
-#                         dialogue_index += 1
-#                         done_top = False
-#                         done_bottom = False
-#
-#                         message_top = messages_top[active_message_top]
-#                         message_bottom = messages_bottom[active_message_bottom]
-#
-#                         counter = 0
-#                         counter2 = 0
-#                         break
-#
-#         screen.blit(image2, (0, 0))
-#         screen.blit(text_box, (0, 450))
-#         screen.blit(gender_box, (660, 285))
-#         screen.blit(gender_arrow, (gx, gy))
-#
-#
-#         dropShadowText(screen, "BOY", 10, 723, 305)
-#         dropShadowText(screen, "GIRL", 10, 723, 365)
-#
-#
-#         if faded == True:
-#             if counter < speed * len(message_top):
-#                 counter += 1
-#             elif counter >= speed * len(message_top):
-#                 done_top = True
-#             if done_top == True:
-#                 if counter2 < speed * len(message_bottom):
-#                     counter2 += 1
-#                 elif counter2 >= speed * len(message_bottom):
-#                     done_bottom = True
-#
-#             dropShadowText_Top(screen, message_top, 10, 73, 478, counter, speed)
-#             dropShadowText_Bottom(screen, message_bottom, 10, 73, 538, counter2, speed)
-#
-#         pygame.display.update()
-#
-#
-#
-#     for x in range(255, -250, -5):
-#         for event in pygame.event.get():
-#             if event.type == pygame.QUIT:
-#                 pygame.quit()
-#         screen.blit(image3, (330, 395))
-#         screen.blit(gender[index], (450, 128))
-#         screen.blit(image2, (0, 0))
-#         pygame.time.delay(18)
-#         image2.set_alpha(x)
-#
-#         pygame.display.update()
-#
-#     pygame.time.wait(100)
-#
-#     while check == 2:
-#         message_top = messages_top[11]
-#         message_bottom = messages_bottom[11]
-#
-#         for event in pygame.event.get():
-#             if event.type == pygame.QUIT:
-#                 pygame.quit()
-#             if event.type == pygame.KEYDOWN:
-#                 if event.key == pygame.K_RETURN and done_top and done_bottom and active_message_top < len(messages_top) and active_message_bottom < len(messages_bottom):
-#                     test_fade(1024,648)
-#                     name_selecting()
-#
-#
-#         screen.blit(image3, (330, 395))
-#         screen.blit(gender[index], (450, 128))
-#         screen.blit(text_box, (0, 450))
-#
-#
-#         if faded == True:
-#             if counter < speed * len(message_top):
-#                 counter += 1
-#             elif counter >= speed * len(message_top):
-#                 done_top = True
-#             if done_top == True:
-#                 if counter2 < speed * len(message_bottom):
-#                     counter2 += 1
-#                 elif counter2 >= speed * len(message_bottom):
-#                     done_bottom = True
-#
-#             dropShadowText_Top(screen, message_top, 10, 73, 478, counter, speed)
-#             dropShadowText_Bottom(screen, message_bottom, 10, 73, 538, counter2, speed)
-#
-#         pygame.display.update()
-#         # #music.play()
-#         # pygame.time.set_timer(fade_event,3000)
+
+def profoak_intro(counter, counter2, message_top, message_bottom, done_top, done_bottom, active_message_top, active_message_bottom):
+    global faded, fade_num, flashed, flash_num
+    check = 0
+    dialogue_index = 0
+    gender = [boy,girl]
+    index = 0
+
+    def fade():
+        global fade_num
+        global faded
+        pygame.time.delay(220)
+        fade_num-=51
+        nidoran.set_alpha(0)
+        if fade_num < -150:
+            pygame.time.delay(1500)
+            faded = True
+            return faded
+
+    def flash_in():
+        global flashed
+        global flash_num
+        pygame.time.delay(140)
+        flash_num+=51
+
+        if flash_num > 335:
+            flashed = True
+            return flashed
+
+    def flash_out():
+        global flashed
+        global flash_num
+        pygame.time.delay(140)
+        flash_num -= 51
+        if flash_num < -305:
+            flashed = False
+            return flashed
+
+    def test_fade(width, height):
+        testing_fade = pygame.Surface((width, height))
+        testing_fade.fill((0, 0, 0))
+        for alpha in range(0,255):
+            testing_fade.set_alpha(alpha)
+            screen.blit(testing_fade, (0, 0))
+            pygame.display.update()
+            pygame.time.delay(20)
+
+
+
+
+
+    while check == 0:
+        music.play()
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+            elif dialogue_index < 4 or 4 < dialogue_index < 9:
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_RETURN and done_top and done_bottom and active_message_top < len(messages_top) and active_message_bottom < len(messages_bottom):
+                        active_message_top += 1
+                        active_message_bottom += 1
+
+                        dialogue_index+=1
+                        done_top = False
+                        done_bottom = False
+
+                        message_top = messages_top[active_message_top]
+                        message_bottom = messages_bottom[active_message_bottom]
+
+
+                        counter = 0
+                        counter2 = 0
+
+            elif dialogue_index == 9:
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_RETURN and done_top and done_bottom and active_message_top < len(messages_top) and active_message_bottom < len(messages_bottom):
+                        check = 1
+
+                        active_message_top += 1
+                        active_message_bottom += 1
+
+                        dialogue_index += 1
+                        done_top = False
+                        done_bottom = False
+
+                        message_top = messages_top[active_message_top]
+                        message_bottom = messages_bottom[active_message_bottom]
+
+                        counter = 0
+                        counter2 = 0
+                        break
+
+        screen.blit(image, (0, 0))
+        screen.blit(nidoran, (350, 325))
+        screen.blit(flash_box, (0, 0))
+        flash_box.set_alpha(flash_num)
+        screen.blit(text_box, (0, 450))
+        text_box.set_alpha(0)
+        screen.blit(fade_box, (0, 0))
+        fade_box.set_alpha(fade_num)
+
+
+        if faded == False:
+            fade()
+        if faded == True:
+            text_box.set_alpha(255)
+            if counter < speed * len(message_top):
+                counter += 1
+            elif counter >= speed * len(message_top):
+                done_top = True
+            if done_top == True:
+                if counter2 < speed * len(message_bottom):
+                    counter2 += 1
+                elif counter2 >= speed * len(message_bottom):
+                    done_bottom = True
+
+            dropShadowText_Top(screen,message_top, 10, 73, 478, counter, speed)
+            dropShadowText_Bottom(screen,message_bottom, 10, 73, 538, counter2, speed)
+
+        if dialogue_index == 4 and done_top == True:
+            flash_in()
+            if flash_num >200 and 300 > flash_num:
+
+                active_message_top = 5
+                active_message_bottom = 5
+
+
+                done_top = False
+                done_bottom = False
+
+                message_top = messages_top[active_message_top]
+                message_bottom = messages_bottom[active_message_bottom]
+
+                counter = 0
+                counter2 = 0
+
+        if flashed == True:
+            dialogue_index = 5
+            nidoran.set_alpha(255)
+            flash_out()
+
+
+        pygame.display.update()
+
+    for x in range(255, -250, -5):
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+
+        screen.blit(image2, (0, 0))
+        screen.blit(image, (0, 0))
+        pygame.time.delay(18)
+        image.set_alpha(x)
+        pygame.display.update()
+
+    pygame.time.wait(500)
+    gy = 320
+    gx = 700
+    while check == 1:
+
+
+        faded = True
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+            if event.type == pygame.KEYDOWN:
+                if gy != 380:
+                    if event.key == pygame.K_DOWN:
+                        gy += 60
+                    elif event.key == pygame.K_RETURN:
+                        check = 2
+                        index = 0
+                        active_message_top += 1
+                        active_message_bottom += 1
+
+                        dialogue_index += 1
+                        done_top = False
+                        done_bottom = False
+
+                        message_top = messages_top[active_message_top]
+                        message_bottom = messages_bottom[active_message_bottom]
+
+                        counter = 0
+                        counter2 = 0
+                        break
+                elif gy != 320:
+                    if event.key == pygame.K_UP:
+                        gy -= 60
+                    elif event.key == pygame.K_RETURN:
+                        check = 2
+                        index = 1
+                        active_message_top += 1
+                        active_message_bottom += 1
+
+                        dialogue_index += 1
+                        done_top = False
+                        done_bottom = False
+
+                        message_top = messages_top[active_message_top]
+                        message_bottom = messages_bottom[active_message_bottom]
+
+                        counter = 0
+                        counter2 = 0
+                        break
+
+        screen.blit(image2, (0, 0))
+        screen.blit(text_box, (0, 450))
+        screen.blit(gender_box, (660, 285))
+        screen.blit(gender_arrow, (gx, gy))
+
+
+        dropShadowText(screen, "BOY", 10, 723, 305)
+        dropShadowText(screen, "GIRL", 10, 723, 365)
+
+
+        if faded == True:
+            if counter < speed * len(message_top):
+                counter += 1
+            elif counter >= speed * len(message_top):
+                done_top = True
+            if done_top == True:
+                if counter2 < speed * len(message_bottom):
+                    counter2 += 1
+                elif counter2 >= speed * len(message_bottom):
+                    done_bottom = True
+
+            dropShadowText_Top(screen, message_top, 10, 73, 478, counter, speed)
+            dropShadowText_Bottom(screen, message_bottom, 10, 73, 538, counter2, speed)
+
+        pygame.display.update()
+
+
+
+    for x in range(255, -250, -5):
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+        screen.blit(image3, (330, 395))
+        screen.blit(gender[index], (450, 128))
+        screen.blit(image2, (0, 0))
+        pygame.time.delay(18)
+        image2.set_alpha(x)
+
+        pygame.display.update()
+
+    pygame.time.wait(100)
+
+    while check == 2:
+        message_top = messages_top[11]
+        message_bottom = messages_bottom[11]
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN and done_top and done_bottom and active_message_top < len(messages_top) and active_message_bottom < len(messages_bottom):
+                    test_fade(1024,648)
+                    name_selecting()
+
+
+        screen.blit(image3, (330, 395))
+        screen.blit(gender[index], (450, 128))
+        screen.blit(text_box, (0, 450))
+
+
+        if faded == True:
+            if counter < speed * len(message_top):
+                counter += 1
+            elif counter >= speed * len(message_top):
+                done_top = True
+            if done_top == True:
+                if counter2 < speed * len(message_bottom):
+                    counter2 += 1
+                elif counter2 >= speed * len(message_bottom):
+                    done_bottom = True
+
+            dropShadowText_Top(screen, message_top, 10, 73, 478, counter, speed)
+            dropShadowText_Bottom(screen, message_bottom, 10, 73, 538, counter2, speed)
+
+        pygame.display.update()
+       # pygame.time.set_timer(fade_event,3000)
 
 
 def name_selecting():
     boy_select = NameSelectSprite(212, 145,"Boy")
     hover = NameSelectSprite(138, 327,"Hover")
+    name_arrow = NameSelectSprite2(368, 211,"Name_Arrow")
 
     boy_select.size_upd(58,73)
     hover.size_upd(47,63)
+    name_arrow.size_upd(120,40)
+
 
     moving_sprites = pygame.sprite.Group()
     moving_sprites.add(boy_select)
     moving_sprites.add(hover)
+    moving_sprites.add(name_arrow)
+
+
+    index_x = 1
+    index_y = 1
+    letter = 1
+    side_x = False
+
+    file = open("Alphabet.txt")
+    alphabet = {}
+    word= ""
+
+    set = []
+    z = 1
+    y = 1
+
+    for x in range(1, 27, 1):
+        new_letter = {x: file.readline().strip()}
+        alphabet.update(new_letter)
+
+
 
 
     while True:
+        print(y)
+
+
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
+            elif event.type == pygame.KEYDOWN:
+                try:
+                    if event.key == pygame.K_RETURN:
+                        word = word + alphabet.get(letter)
+                        print(alphabet.get(letter))
+                    if y > 2:
+                        side_x = True
+                    else:
+                        side_x = False
+                    if event.key == pygame.K_RIGHT:
+                        if side_x == False:
+                            if z == 6:
+                                raise ValueError
+                        if side_x == True:
+                            if z == 7:
+                                raise ValueError
+                        if z == 3:
+                            z += 1
+                            letter += 1
+                            hover.move(137, 0)
+                        else:
+                            z += 1
+                            letter += 1
+                            hover.move(51, 0)
+                    if event.key == pygame.K_LEFT:
+                        if z == 1:
+                            raise ValueError
+                        if z == 4:
+                            z -= 1
+                            letter -= 1
+                            hover.move(-137, 0)
+                        elif z != 4:
+                            z -= 1
+                            letter -= 1
+                            hover.move(-51, 0)
+                    if event.key == pygame.K_DOWN:
+                        if y == 4:
+                            raise ValueError
+                        if y < 3:
+                            letter+=6
+                        else:
+                            letter+=7
+                        y+=1
+                        hover.move(0, 64)
+                    if event.key == pygame.K_UP:
+                        if y == 1:
+                            raise ValueError
+                        if z == 7 and y == 3:
+                            raise ValueError
+                        if y < 4:
+                            letter -= 6
+                        else:
+                            letter -= 7
+                        y -= 1
+                        hover.move(0, -64)
+                except ValueError:
+                    print("no")
+
 
         screen.blit(name_select, (0, 0))
         moving_sprites.draw(screen)
         moving_sprites.update()
+        dropShadowText(screen, word, 10, 723, 305)
+
         pygame.display.update()
 
 
@@ -457,7 +543,7 @@ def name_selecting():
 #             if event.type == pygame.MOUSEBUTTONDOWN:
 #                 vid.close()
 #                 profoak_intro(counter, counter2, message_top, message_bottom, done_top, done_bottom, active_message_top, active_message_bottom)
-
+#
 
 
 def main():
