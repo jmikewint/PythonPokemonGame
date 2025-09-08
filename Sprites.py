@@ -1,67 +1,85 @@
 import pygame, sys
 
 class NameSelectSprite(pygame.sprite.Sprite):
-    def __init__(self, pos_x, pos_y, gender):
+    def __init__(self, pos_x, pos_y, gender,w,h):
         super().__init__()
         self.sprites = []
-        self.sprites.append(pygame.image.load(gender+"1.png"))
-        self.sprites.append(pygame.image.load(gender+"2.png"))
-        self.sprites.append(pygame.image.load(gender+"3.png"))
-        self.sprites.append(pygame.image.load(gender+"2.png"))
-        self.sprites.append(pygame.image.load(gender+"2.png"))
+        image1 = pygame.image.load(gender+"1.png")
+        image1 = pygame.transform.scale(image1, (w, h))
+        self.sprites.append(image1)
+        image1 = pygame.image.load(gender + "2.png")
+        image1 = pygame.transform.scale(image1, (w, h))
+        self.sprites.append(image1)
+        image1 = pygame.image.load(gender + "3.png")
+        image1 = pygame.transform.scale(image1, (w, h))
+        self.sprites.append(image1)
+        image1 = pygame.image.load(gender + "2.png")
+        image1 = pygame.transform.scale(image1, (w, h))
+        self.sprites.append(image1)
 
 
         self.current_sprite = 0
         self.image = self.sprites[self.current_sprite]
 
+
         self.rect = self.image.get_rect()
-        self.image = pygame.transform.scale(self.image, (500,500))
         self.rect.topleft = [pos_x, pos_y]
 
     def update(self):
-        self.current_sprite += 0.005
+        self.current_sprite += 0.007
 
         if self.current_sprite >= len(self.sprites):
             self.current_sprite = 0
 
         self.image = self.sprites[int(self.current_sprite)]
 
-    def size_upd(self, w,h):
-        for i in range(len(self.sprites)):
-            self.sprites[i] = pygame.transform.scale(self.sprites[i], (w, h))
+
 
     def move(self, pos_x, pos_y):
         self.rect.x += pos_x
         self.rect.y += pos_y
-class NameSelectSprite2(pygame.sprite.Sprite):
-    def __init__(self, pos_x, pos_y, gender):
-        super().__init__()
+
+class LetterSpaceSprite(NameSelectSprite):
+    def __init__(self, pos_x, pos_y, gender,w,h):
+        super().__init__(pos_x,pos_y,gender,w,h)
         self.sprites = []
-        self.sprites.append(pygame.image.load(gender+"1.png"))
-        self.sprites.append(pygame.image.load(gender+"2.png"))
-        self.sprites.append(pygame.image.load(gender+"3.png"))
-        self.sprites.append(pygame.image.load(gender+"4.png"))
+        self.is_animating = False
+        for x in range(1,5):
+            image1 = pygame.image.load(gender + str(x)+".png")
+            image1 = pygame.transform.scale(image1, (w, h))
+            self.sprites.append(image1)
+        for x in range(3,1,-1):
+            image1 = pygame.image.load(gender + str(x) + ".png")
+            image1 = pygame.transform.scale(image1, (w, h))
+            self.sprites.append(image1)
+
+    def animate(self):
+        self.is_animating = True
+    def animate_off(self, gender,w ,h):
+        image1 = pygame.image.load(gender + "1.png")
+        image1 = pygame.transform.scale(image1, (w, h))
+        self.sprites = [image1]
 
 
-        self.current_sprite = 0
-        self.image = self.sprites[self.current_sprite]
-
-        self.rect = self.image.get_rect()
-        self.image = pygame.transform.scale(self.image, (500,500))
-        self.rect.topleft = [pos_x, pos_y]
-
+    def check(self):
+        print(self.sprites)
     def update(self):
-        self.current_sprite += 0.008
+        if self.is_animating == True:
+            self.current_sprite += 0.01
+            if self.current_sprite >= len(self.sprites):
+                self.current_sprite = 0
+                self.is_animating = False
 
-        if self.current_sprite >= len(self.sprites):
-            self.current_sprite = 0
+            self.image = self.sprites[int(self.current_sprite)]
 
-        self.image = self.sprites[int(self.current_sprite)]
 
-    def size_upd(self, w,h):
-        for i in range(len(self.sprites)):
-            self.sprites[i] = pygame.transform.scale(self.sprites[i], (w, h))
+class NameSelectArrow(NameSelectSprite):
+    def __init__(self, pos_x, pos_y, gender,w,h):
+        super().__init__(pos_x,pos_y,gender,w,h)
+        self.sprites = []
+        for x in range(1, 5):
+            image1 = pygame.image.load(gender + str(x) + ".png")
+            image1 = pygame.transform.scale(image1, (w, h))
+            self.sprites.append(image1)
 
-    def move(self, pos_x, pos_y):
-        self.rect.x += pos_x
-        self.rect.y += pos_y
+

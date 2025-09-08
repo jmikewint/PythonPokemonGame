@@ -1,13 +1,9 @@
 file = open("Alphabet.txt")
 alphabet = {}
 
-set = list(7)
+set = [1,2,3,4,5,6]
+num = set.pop(0)
 
-
-print(set)
-try:
-    set.append()
-except ValueError:
-    print("no")
+print(num)
 
 
