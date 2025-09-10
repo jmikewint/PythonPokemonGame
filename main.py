@@ -129,10 +129,21 @@ def test_fade(width, height):
         testing_fade.set_alpha(alpha)
         screen.blit(testing_fade, (0, 0))
         pygame.display.update()
-        pygame.time.delay(50)
+        pygame.time.delay(5)
+
+def text_reset(act_top, act_bottom,dial,done_top,done_bottom,mes_top,mes_bottom,mess_top, mess_bottom,count,count2):
+    act_top += 1
+    act_bottom += 1
+    dial += 1
+    done_top = False
+    done_bottom = False
+    mes_top = mess_top[act_top]
+    mes_bottom = mess_bottom[act_bottom]
+    counter = 0
+    counter2 = 0
 
 def profoak_intro(counter, counter2, message_top, message_bottom, done_top, done_bottom, active_message_top, active_message_bottom):
-    global faded, fade_num,gx,gy,dialogue_index,index,check,test1,test2
+    global gx,gy,dialogue_index,index,check
     gender = [boy,girl]
 
     boy_select = NameSelectSprite(212, 145,"Boy",58,73)
@@ -616,11 +627,15 @@ def profoak_intro(counter, counter2, message_top, message_bottom, done_top, done
                 pygame.display.update()
 
         elif check == 5:
+            gender_box.set_alpha(0)
+
             pygame.time.set_timer(timer_event, 10)
             nx = 450
             fx = 330
-            gx = 100
             gy = 100
+            nemesis_name = 0
+
+
             for x in range(255, -250, -5):
                 for event in pygame.event.get():
                     if event.type == pygame.QUIT:
@@ -655,17 +670,22 @@ def profoak_intro(counter, counter2, message_top, message_bottom, done_top, done
                 for event in pygame.event.get():
                     if event.type == pygame.QUIT:
                         pygame.quit()
-                    if event.type == pygame.KEYDOWN:
-                        if event.key == pygame.K_RETURN and done_top and done_bottom and active_message_top < len(messages_top) and active_message_bottom < len(messages_bottom):
-                            active_message_top += 1
-                            active_message_bottom += 1
-                            dialogue_index += 1
-                            done_top = False
-                            done_bottom = False
-                            message_top = messages_top[active_message_top]
-                            message_bottom = messages_bottom[active_message_bottom]
-                            counter = 0
-                            counter2 = 0
+                    if dialogue_index < 15 or dialogue_index > 16:
+                        if event.type == pygame.KEYDOWN:
+                            if event.key == pygame.K_RETURN and done_top and done_bottom and active_message_top < len(messages_top) and active_message_bottom < len(messages_bottom):
+                                if dialogue_index == 17:
+                                    check = 6
+                                    break
+                                active_message_top += 1
+                                active_message_bottom += 1
+                                dialogue_index += 1
+                                done_top = False
+                                done_bottom = False
+                                message_top = messages_top[active_message_top]
+                                message_bottom = messages_bottom[active_message_bottom]
+                                counter = 0
+                                counter2 = 0
+
                     if dialogue_index == 15:
                         if nx < 700:
                             if event.type == timer_event:
@@ -673,11 +693,122 @@ def profoak_intro(counter, counter2, message_top, message_bottom, done_top, done
                                 fx+=5
                         if nx == 700:
                             if event.type == pygame.KEYDOWN:
+                                if gy != 320:
+                                    if event.key == pygame.K_DOWN:
+                                        gy+=55
+                                if gy != 100:
+                                    if event.key == pygame.K_UP:
+                                        gy-=55
+                                if event.key == pygame.K_RETURN:
+                                    match gy:
+                                        case 100:
+                                            print("poo")
+                                        case 155:
+                                            messages_top.append("...Er, was it GREEN?")
+                                            messages_bottom.append("")
+                                            active_message_top += 1
+                                            active_message_bottom += 1
+                                            dialogue_index += 1
+                                            done_top = False
+                                            done_bottom = False
+                                            message_top = messages_top[active_message_top]
+                                            message_bottom = messages_bottom[active_message_bottom]
+                                            counter = 0
+                                            counter2 = 0
+                                            gy = 80
+                                            nemesis_name = 1
+                                        case 210:
+                                            messages_top.append("...Er, was it GARY?")
+                                            messages_bottom.append("")
+                                            active_message_top += 1
+                                            active_message_bottom += 1
+                                            dialogue_index += 1
+                                            done_top = False
+                                            done_bottom = False
+                                            message_top = messages_top[active_message_top]
+                                            message_bottom = messages_bottom[active_message_bottom]
+                                            counter = 0
+                                            counter2 = 0
+                                            nemesis_name = 2
+                                        case 265:
+                                            messages_top.append("...Er, was it KAZ?")
+                                            messages_bottom.append("")
+                                            active_message_top += 1
+                                            active_message_bottom += 1
+                                            dialogue_index += 1
+                                            done_top = False
+                                            done_bottom = False
+                                            message_top = messages_top[active_message_top]
+                                            message_bottom = messages_bottom[active_message_bottom]
+                                            counter = 0
+                                            counter2 = 0
+                                            nemesis_name = 3
+                                        case 320:
+                                            messages_top.append("...Er, was it TORU?")
+                                            messages_bottom.append("")
+                                            active_message_top += 1
+                                            active_message_bottom += 1
+                                            dialogue_index += 1
+                                            done_top = False
+                                            done_bottom = False
+                                            message_top = messages_top[active_message_top]
+                                            message_bottom = messages_bottom[active_message_bottom]
+                                            counter = 0
+                                            counter2 = 0
+                                            nemesis_name = 4
+                                    nx+=1
+                    if dialogue_index == 16:
+                        if event.type == pygame.KEYDOWN:
+                            if gy != 140:
                                 if event.key == pygame.K_DOWN:
-                                    gy+=55
-                                elif event.key == pygame.K_UP:
-                                    gy-=55
+                                    gy += 60
+                                elif event.key == pygame.K_RETURN and done_top and done_bottom and active_message_top < len(messages_top) and active_message_bottom < len(messages_bottom):
+                                    match nemesis_name:
+                                        case 0:
+                                            print("poo")
+                                        case 1:
+                                            messages_top.append("That's right! I remember now!")
+                                            messages_bottom.append("His name is GREEN!")
+                                            messages_top.append(word+"!")
+                                            messages_bottom.append("")
+                                        case 2:
+                                            messages_top.append("That's right! I remember now!")
+                                            messages_bottom.append("His name is GARY!")
+                                            messages_top.append(word + "!")
+                                            messages_bottom.append("")
+                                        case 3:
+                                            messages_top.append("That's right! I remember now!")
+                                            messages_bottom.append("His name is KAZ!")
+                                            messages_top.append(word + "!")
+                                            messages_bottom.append("")
+                                        case 4:
+                                            messages_top.append("That's right! I remember now!")
+                                            messages_bottom.append("His name is TORU!")
+                                            messages_top.append(word + "!")
+                                            messages_bottom.append("")
 
+                                    active_message_top += 1
+                                    active_message_bottom += 1
+                                    dialogue_index += 1
+                                    done_top = False
+                                    done_bottom = False
+                                    message_top = messages_top[active_message_top]
+                                    message_bottom = messages_bottom[active_message_bottom]
+                                    counter = 0
+                                    counter2 = 0
+                            elif gy != 80:
+                                if event.key == pygame.K_UP:
+                                    gy -= 60
+                                elif event.key == pygame.K_RETURN and done_top and done_bottom and active_message_top < len(messages_top) and active_message_bottom < len(messages_bottom):
+                                    active_message_top += 1
+                                    active_message_bottom += 1
+                                    dialogue_index += 1
+                                    done_top = False
+                                    done_bottom = False
+                                    message_top = messages_top[active_message_top]
+                                    message_bottom = messages_bottom[active_message_bottom]
+                                    counter = 0
+                                    counter2 = 0
 
                 if counter < speed * len(message_top):
                     counter += 1
@@ -696,9 +827,8 @@ def profoak_intro(counter, counter2, message_top, message_bottom, done_top, done
                 screen.blit(text_box, (0, 450))
 
 
+
                 if nx == 700:
-                    test1 = 1000
-                    print("hello")
                     screen.blit(gender_box2, (40, 40))
                     screen.blit(gender_arrow, (100, gy))
                     dropShadowText(screen, "NEW NAME", 10, 130, 85)
@@ -707,14 +837,105 @@ def profoak_intro(counter, counter2, message_top, message_bottom, done_top, done
                     dropShadowText(screen, "KAZ", 10, 130, 250)
                     dropShadowText(screen, "TORU", 10, 130, 305)
 
+                if dialogue_index == 16 and done_top == True:
+                    gender_box.set_alpha(255)
+                    screen.blit(gender_box, (40, 45))
+                    screen.blit(gender_arrow, (gx, gy))
+                    dropShadowText(screen, "Yes", 10, 104, 65)
+                    dropShadowText(screen, "No", 10, 108, 125)
 
 
-                print(nx)
+
 
                 dropShadowText_Top(screen, message_top, 10, 73, 478, counter, speed)
                 dropShadowText_Bottom(screen, message_bottom, 10, 73, 538, counter2, speed)
 
                 pygame.display.flip()
+
+        elif check == 6:
+            for x in range(255, -250, -5):
+                for event in pygame.event.get():
+                    if event.type == pygame.QUIT:
+                        pygame.quit()
+                image2.set_alpha(255)
+                screen.blit(image2, [0, 0])
+                screen.blit(image3, [580, 395])
+                screen.blit(nemesis, [701, 128])
+                pygame.time.delay(18)
+                image3.set_alpha(x)
+                nemesis.set_alpha(x)
+                pygame.display.update()
+            pygame.time.delay(300)
+            for x in range(255, -250, -5):
+                for event in pygame.event.get():
+                    if event.type == pygame.QUIT:
+                        pygame.quit()
+
+                image3.set_alpha(255)
+                gender[index].set_alpha(255)
+                screen.blit(image3, (330, 395))
+                screen.blit(gender[index], (450, 128))
+                screen.blit(image2, (0, 0))
+                pygame.time.delay(18)
+                image2.set_alpha(x)
+                pygame.display.update()
+            pygame.time.wait(200)
+
+            active_message_top += 1
+            active_message_bottom += 1
+            dialogue_index += 1
+            done_top = False
+            done_bottom = False
+            message_top = messages_top[active_message_top]
+            message_bottom = messages_bottom[active_message_bottom]
+            counter = 0
+            counter2 = 0
+
+            messages_top.append("Your very own POKeMON legend is")
+            messages_bottom.append("about to unfold!")
+            messages_top.append("A world of dreams and adventures")
+            messages_bottom.append("with POKeMON awaits! Let's go!")
+
+            while check == 6:
+                for event in pygame.event.get():
+                    if event.type == pygame.QUIT:
+                        pygame.quit()
+                    if event.type == pygame.KEYDOWN:
+                        if event.key == pygame.K_RETURN and done_top and done_bottom and active_message_top < len(messages_top) and active_message_bottom < len(messages_bottom):
+                            active_message_top += 1
+                            active_message_bottom += 1
+
+                            dialogue_index += 1
+                            done_top = False
+                            done_bottom = False
+
+                            message_bottom = messages_bottom[active_message_bottom]
+                            message_top = messages_top[active_message_top]
+
+                            counter = 0
+                            counter2 = 0
+
+                if counter < speed * len(message_top):
+                    counter += 1
+                elif counter >= speed * len(message_top):
+                    done_top = True
+                if done_top == True:
+                    if counter2 < speed * len(message_bottom):
+                        counter2 += 1
+                    elif counter2 >= speed * len(message_bottom):
+                        done_bottom = True
+
+                image2.set_alpha(255)
+                screen.blit(image2, [0, 0])
+                screen.blit(image3, (330, 395))
+                screen.blit(gender[index], (450, 128))
+                screen.blit(text_box, (0, 450))
+
+
+                dropShadowText_Top(screen, message_top, 10, 73, 478, counter, speed)
+                dropShadowText_Bottom(screen, message_bottom, 10, 73, 538, counter2, speed)
+
+                pygame.display.update()
 
 
 
