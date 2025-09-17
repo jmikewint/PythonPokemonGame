@@ -1,7 +1,7 @@
 import pygame
 from time import sleep
 
-from Sprites import NameSelectSprite, LetterSpaceSprite, NameSelectArrow
+from sprites import NameSelectSprite, LetterSpaceSprite, NameSelectArrow
 from pyvidplayer import Video
 
 
@@ -31,47 +31,47 @@ active_message_bottom = 0
 message_bottom = messages_bottom[active_message_bottom]
 
 
-image = pygame.image.load('ProfOak.jpg')
+image = pygame.image.load('IntroImages/ProfOak.jpg')
 image = pygame.transform.scale(image, (width, height))
-image2 = pygame.image.load('ProfOak_Back.jpg').convert_alpha()
+image2 = pygame.image.load('IntroImages/ProfOak_Back.jpg').convert_alpha()
 image2 = pygame.transform.scale(image2, (width, height))
-image3 = pygame.image.load('Oak_Platform.png').convert_alpha()
+image3 = pygame.image.load('IntroImages/Oak_Platform.png').convert_alpha()
 image3 = pygame.transform.scale(image3, (350, 75))
 
-nidoran = pygame.image.load('NidoranIntro.png')
+nidoran = pygame.image.load('IntroImages/NidoranIntro.png')
 nidoran = pygame.transform.scale(nidoran, (120, 120))
-boy = pygame.image.load('Boy.png').convert_alpha()
+boy = pygame.image.load('IntroImages/Boy.png').convert_alpha()
 boy = pygame.transform.scale(boy, (130, 315))
-girl = pygame.image.load('Girl.png').convert_alpha()
+girl = pygame.image.load('IntroImages/Girl.png').convert_alpha()
 girl = pygame.transform.scale(girl, (130, 315))
-nemesis = pygame.image.load('Nemesis.png').convert_alpha()
+nemesis = pygame.image.load('IntroImages/Nemesis.png').convert_alpha()
 nemesis = pygame.transform.scale(nemesis, (130, 325))
 
-fade_box = pygame.image.load('Black.jpg').convert_alpha()
+fade_box = pygame.image.load('IntroImages/Black.jpg').convert_alpha()
 fade_box = pygame.transform.scale(fade_box, (width, height))
 
-flash_box = pygame.image.load('White.jpg').convert_alpha()
+flash_box = pygame.image.load('IntroImages/White.jpg').convert_alpha()
 flash_box = pygame.transform.scale(flash_box, (width, height))
 
 
-name_select = pygame.image.load('Name_Select.jpg').convert_alpha()
+name_select = pygame.image.load('IntroImages/Name_Select.jpg').convert_alpha()
 name_select = pygame.transform.scale(name_select, (width, height))
 
 
-text_box = pygame.image.load('TextBox.png').convert_alpha()
+text_box = pygame.image.load('IntroImages/TextBox.png').convert_alpha()
 text_box = pygame.transform.scale(text_box, (1024, 194))
-gender_box = pygame.image.load('Gender_Select.png').convert_alpha()
+gender_box = pygame.image.load('IntroImages/Gender_Select.png').convert_alpha()
 gender_box = pygame.transform.scale(gender_box, (300, 163))
-gender_box2 = pygame.image.load('Gender_Select.png').convert_alpha()
+gender_box2 = pygame.image.load('IntroImages/Gender_Select.png').convert_alpha()
 gender_box2 = pygame.transform.scale(gender_box2, (500, 380))
-gender_arrow = pygame.image.load('Gender_Arrow.png').convert_alpha()
+gender_arrow = pygame.image.load('IntroImages/Gender_Arrow.png').convert_alpha()
 gender_arrow = pygame.transform.scale(gender_arrow, (20, 33))
 
 
-poke_ball_notopen = pygame.image.load('PokeBall.png').convert_alpha()
+poke_ball_notopen = pygame.image.load('IntroImages/PokeBall.png').convert_alpha()
 poke_ball_notopen = pygame.transform.scale(poke_ball_notopen, (40, 40))
 
-poke_ball_half = pygame.image.load('PokeBallHalf.png').convert_alpha()
+poke_ball_half = pygame.image.load('IntroImages/PokeBallHalf.png').convert_alpha()
 poke_ball_half = pygame.transform.scale(poke_ball_half, (40, 40))
 
 timer = pygame.time.Clock()
@@ -87,7 +87,7 @@ running = True
 counter,counter2,counter3, dialogue_index, index,check = 0,0,0,0,0,0
 done_top = False
 done_bottom = False
-speed = 1
+speed = 5
 
 
 
@@ -131,16 +131,6 @@ def test_fade(width, height):
         pygame.display.update()
         pygame.time.delay(5)
 
-def text_reset(act_top, act_bottom,dial,done_top,done_bottom,mes_top,mes_bottom,mess_top, mess_bottom,count,count2):
-    act_top += 1
-    act_bottom += 1
-    dial += 1
-    done_top = False
-    done_bottom = False
-    mes_top = mess_top[act_top]
-    mes_bottom = mess_bottom[act_bottom]
-    counter = 0
-    counter2 = 0
 
 def profoak_intro(counter, counter2, message_top, message_bottom, done_top, done_bottom, active_message_top, active_message_bottom):
     global gx,gy,dialogue_index,index,check
@@ -179,6 +169,7 @@ def profoak_intro(counter, counter2, message_top, message_bottom, done_top, done
     z = 1
     y = 1
     while True:
+        timer.tick(10)
         if check == 0:
             pygame.time.set_timer(timer_event, 50)
             for x in range(255, -300, -50):
@@ -706,56 +697,30 @@ def profoak_intro(counter, counter2, message_top, message_bottom, done_top, done
                                         case 155:
                                             messages_top.append("...Er, was it GREEN?")
                                             messages_bottom.append("")
-                                            active_message_top += 1
-                                            active_message_bottom += 1
-                                            dialogue_index += 1
-                                            done_top = False
-                                            done_bottom = False
-                                            message_top = messages_top[active_message_top]
-                                            message_bottom = messages_bottom[active_message_bottom]
-                                            counter = 0
-                                            counter2 = 0
-                                            gy = 80
                                             nemesis_name = 1
                                         case 210:
                                             messages_top.append("...Er, was it GARY?")
                                             messages_bottom.append("")
-                                            active_message_top += 1
-                                            active_message_bottom += 1
-                                            dialogue_index += 1
-                                            done_top = False
-                                            done_bottom = False
-                                            message_top = messages_top[active_message_top]
-                                            message_bottom = messages_bottom[active_message_bottom]
-                                            counter = 0
-                                            counter2 = 0
                                             nemesis_name = 2
+                                            gy = 80
                                         case 265:
                                             messages_top.append("...Er, was it KAZ?")
                                             messages_bottom.append("")
-                                            active_message_top += 1
-                                            active_message_bottom += 1
-                                            dialogue_index += 1
-                                            done_top = False
-                                            done_bottom = False
-                                            message_top = messages_top[active_message_top]
-                                            message_bottom = messages_bottom[active_message_bottom]
-                                            counter = 0
-                                            counter2 = 0
                                             nemesis_name = 3
                                         case 320:
                                             messages_top.append("...Er, was it TORU?")
                                             messages_bottom.append("")
-                                            active_message_top += 1
-                                            active_message_bottom += 1
-                                            dialogue_index += 1
-                                            done_top = False
-                                            done_bottom = False
-                                            message_top = messages_top[active_message_top]
-                                            message_bottom = messages_bottom[active_message_bottom]
-                                            counter = 0
-                                            counter2 = 0
                                             nemesis_name = 4
+                                    active_message_top += 1
+                                    active_message_bottom += 1
+                                    dialogue_index += 1
+                                    done_top = False
+                                    done_bottom = False
+                                    message_top = messages_top[active_message_top]
+                                    message_bottom = messages_bottom[active_message_bottom]
+                                    counter = 0
+                                    counter2 = 0
+                                    gy = 80
                                     nx+=1
                     if dialogue_index == 16:
                         if event.type == pygame.KEYDOWN:
